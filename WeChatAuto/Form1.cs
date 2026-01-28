@@ -243,7 +243,15 @@ namespace WeChatAuto
                     if (!string.IsNullOrWhiteSpace(line))
                     {
                         string amountStr = ((int)amount).ToString(); // 转为整数，不保留小数
-                        processedLines.Add(line + amountStr);
+                        if(line.Contains("第") && line.Contains("场"))
+                        {
+                           // 特殊处理包含“第”和“场”的行，不添加金额
+                            processedLines.Add(line);
+                        }
+                        else
+                        {
+                            processedLines.Add(line + amountStr);
+                        }
                     }
                     else
                     {
